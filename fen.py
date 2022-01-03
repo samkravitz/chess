@@ -19,10 +19,80 @@ if len(sys.argv) != 2:
     print('Usage: ./fen [FEN string]')
     exit()
 
+fen = sys.argv[1]
+sections = fen.split(" ")
 image = Image.open('assets/board.png')
-bishop = Image.open('assets/bishop-black.png')
-image.paste(bishop, (0, 0), mask=bishop)
-image.save('output.png')
-bishop.close()
-image.close()
+rank = 1
+file = 1    # h
 
+# there are 6 sections in a valid FEN string
+if len(sections) != 6:
+    print('Error: invalid FEN')
+    exit()
+
+def get_piece(char):
+    filepath = ''
+    match char:
+        case 'p':
+          filepath = 'assets/pawn-black.png'
+        case 'n':
+          filepath = 'assets/knight-black.png'
+        case 'b':
+          filepath = 'assets/bishop-black.png'
+        case 'r':
+          filepath = 'assets/rook-black.png'
+        case 'q':
+          filepath = 'assets/queen-black.png'
+        case 'k':
+          filepath = 'assets/king-black.png'
+        case 'P':
+          filepath = 'assets/pawn-white.png'
+        case 'N':
+          filepath = 'assets/knight-white.png'
+        case 'B':
+          filepath = 'assets/bishop-white.png'
+        case 'R':
+          filepath = 'assets/rook-white.png'
+        case 'Q':
+          filepath = 'assets/queen-white.png'
+        case 'K':
+          filepath = 'assets/king-white.png'
+
+
+    if filepath == '':
+        print('Error: invalid FEN')
+        exit()
+    
+    piece = Image.open(filepath)
+    if piece is None:
+        print('Error: invalid FEN')
+        exit()
+
+    return piece
+
+def get_offset(rank, file):
+    PIECE_WIDTH = PIECE_HEIGHT = 128
+    rank -= 1
+    file -= 1
+    return (rank * PIECE_WIDTH, file * PIECE_HEIGHT)
+
+# piece placement
+for char in sections[0]:
+    if char.isalpha():
+        piece = get_piece(char)
+        image.paste(piece, get_offset(file, rank), mask=piece)
+        piece.close()
+
+        file += 1
+    elif char.isnumeric():
+        file += int(char)
+    elif char == '/':
+        rank += 1
+        file = 1
+    else:
+        print(char)
+        print('Error: invalid FEN')
+        exit()
+
+image.save('output.png')
+image.close()
