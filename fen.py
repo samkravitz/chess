@@ -13,6 +13,7 @@
 # https://en.wikipedia.org/wiki/Forsyth%E2%80%93Edwards_Notation
 
 import sys
+from datetime import datetime
 from PIL import Image
 
 if len(sys.argv) != 2:
@@ -94,5 +95,6 @@ for char in sections[0]:
         print('Error: invalid FEN')
         exit()
 
-image.save('output.png')
+now = datetime.now()
+image.save(now.strftime('%Y%m%d%H%M%S{}'.format('.png')))
 image.close()
