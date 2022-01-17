@@ -16,12 +16,17 @@ import sys
 from datetime import datetime
 from PIL import Image
 
-if len(sys.argv) != 2:
+sections = []
+
+if len(sys.argv) == 2:
+    fen = sys.argv[1]
+    sections = fen.split(" ")
+elif len(sys.argv) == 7:
+    sections = sys.argv[1:]
+else:
     print('Usage: ./fen [FEN string]')
     exit()
 
-fen = sys.argv[1]
-sections = fen.split(" ")
 image = Image.open('assets/board.png')
 rank = 1
 file = 1    # h
