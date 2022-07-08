@@ -1,3 +1,5 @@
+#! /usr/bin/python
+
 # fen
 # License: MIT
 # See LICENSE for full license text
