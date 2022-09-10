@@ -182,7 +182,8 @@
 			"Kd8",
 			"Qf5",
 			"Nc8"
-		]
+		],
+		"solution": "Rd7#"
 	},
 	{
 		"white": [
@@ -195,7 +196,8 @@
 			"Kd8",
 			"Nc4",
 			"Nf8"
-		]
+		],
+		"solution": "Bg5#"
 	},
 	{
 		"white": [
@@ -208,7 +210,8 @@
 			"Kd8",
 			"Rc7",
 			"Bc4"
-		]
+		],
+		"solution": "Rh8#"
 	},
 	{
 		"white": [
@@ -219,7 +222,8 @@
 		],
 		"black": [
 			"Ke8"
-		]
+		],
+		"solution": "Qe7#"
 	},
 	{
 		"white": [
@@ -230,6 +234,7 @@
 		],
 		"black": [
 			"Ke8"
-		]
+		],
+		"solution": "Rh8#"
 	}
 ]
