@@ -2,6 +2,8 @@
 
 import fs from 'fs'
 import { Chess, PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING, WHITE, BLACK } from 'chess.js'
+import * as readline from 'node:readline/promises'
+import { stdin as input, stdout as output } from 'node:process'
 
 const file = fs.readFileSync('db.json')
 const puzzles = JSON.parse(file)
@@ -46,8 +48,26 @@ if (process.argv.length === 3 && process.argv[2] === 'seed') {
 			chess.undo()
 		})
 	})
-	console.log(puzzles)
-	fs.writeFileSync('db2.json', JSON.stringify(puzzles))
+	fs.writeFileSync('db.json', JSON.stringify(puzzles))
 	console.log('done')
 	process.exit(0)
+}
+
+const rl = readline.createInterface({ input, output })
+while (1) {
+	const puzzle = puzzles[Math.floor(Math.random() * puzzles.length)]
+	console.log('white: ', puzzle.white.join(' '))
+	console.log('black: ', puzzle.black.join(' '))
+
+	let correct = false
+
+	while (!correct) {
+		const answer = await rl.question('> ');
+		if (answer === puzzle.solution.slice(0, -1).toLowerCase()) {
+			console.log('correct!\n');
+			correct = true
+		} else {
+			console.log('incorrect, try again')
+		}
+	}
 }
