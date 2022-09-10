@@ -170,5 +170,66 @@
 			"Bh2"
 		],
 		"solution": "Qb7#"
+	},
+	{
+		"white": [
+			"Ke1",
+			"Qe6",
+			"Rh7",
+			"Be3"
+		],
+		"black": [
+			"Kd8",
+			"Qf5",
+			"Nc8"
+		]
+	},
+	{
+		"white": [
+			"Ke1",
+			"Qe6",
+			"Rh7",
+			"Be3"
+		],
+		"black": [
+			"Kd8",
+			"Nc4",
+			"Nf8"
+		]
+	},
+	{
+		"white": [
+			"Ke1",
+			"Qe6",
+			"Rh7",
+			"Be3"
+		],
+		"black": [
+			"Kd8",
+			"Rc7",
+			"Bc4"
+		]
+	},
+	{
+		"white": [
+			"Kc4",
+			"Qg5",
+			"Rh6",
+			"Nd5"
+		],
+		"black": [
+			"Ke8"
+		]
+	},
+	{
+		"white": [
+			"Kc4",
+			"Qg5",
+			"Rh6",
+			"Ne5"
+		],
+		"black": [
+			"Ke8"
+		]
 	}
 ]
