@@ -8,23 +8,23 @@ import { stdin as input, stdout as output } from 'node:process'
 const file = fs.readFileSync('db.json')
 const puzzles = JSON.parse(file)
 
+const getPieceFromMove = (move) => {
+	switch (move.charAt(0)) {
+		case 'P': return PAWN
+		case 'N': return KNIGHT
+		case 'B': return BISHOP
+		case 'R': return ROOK
+		case 'Q': return QUEEN
+		case 'K': return KING
+	}
+}
+
 if (process.argv.length === 3 && process.argv[2] === 'seed') {
 	console.log('seeding puzzles...')
 
 	puzzles.forEach(puzzle => {
 		const chess = new Chess()
 		chess.clear()
-
-		const getPieceFromMove = (move) => {
-			switch (move.charAt(0)) {
-				case 'P': return PAWN
-				case 'N': return KNIGHT
-				case 'B': return BISHOP
-				case 'R': return ROOK
-				case 'Q': return QUEEN
-				case 'K': return KING
-			}
-		}
 
 		puzzle.white.forEach(move => {
 			const piece = getPieceFromMove(move);
@@ -62,7 +62,29 @@ while (1) {
 	let correct = false
 
 	while (!correct) {
-		const answer = await rl.question('> ');
+		const answer = await rl.question('> ')
+		if (answer === 'answer') {
+			console.log(puzzle.solution)
+			const chess = new Chess()
+			chess.clear()
+			puzzle.white.forEach(move => {
+				const piece = getPieceFromMove(move);
+				const square = move.substring(1)
+				chess.put({ type: piece, color: WHITE }, square)
+			})
+	
+			puzzle.black.forEach(move => {
+				const piece = getPieceFromMove(move);
+				const square = move.substring(1)
+				chess.put({ type: piece, color: BLACK }, square)
+			})
+
+			console.log(chess.ascii())
+
+			console.log()
+			break
+		}
+
 		if (answer === puzzle.solution.slice(0, -1).toLowerCase()) {
 			console.log('correct!\n');
 			correct = true
