@@ -236,5 +236,81 @@
 			"Ke8"
 		],
 		"solution": "Rh8#"
+	},
+	{
+		"white": [
+			"Kc4",
+			"Qg5",
+			"Rh6",
+			"Nd5"
+		],
+		"black": [
+			"Ka5"
+		]
+	},
+	{
+		"white": [
+			"Ke1",
+			"Rg5",
+			"Rh6"
+		],
+		"black": [
+			"Kb7"
+		],
+		"mateIn": 2
+	},
+	{
+		"white": [
+			"Kc6",
+			"Qd1"
+		],
+		"black": [
+			"Kc8"
+		],
+		"mateIn": 2
+	},
+	{
+		"white": [
+			"Kb6",
+			"Bf6",
+			"Bg4"
+		],
+		"black": [
+			"Kb8"
+		],
+		"mateIn": 2
+	},
+	{
+		"white": [
+			"Kg2",
+			"Qb5",
+			"Rd1"
+		],
+		"black": [
+			"Kc7"
+		],
+		"mateIn": 2
+	},
+	{
+		"white": [
+			"Kh1",
+			"Qf8",
+			"Ne5"
+		],
+		"black": [
+			"Kh7"
+		],
+		"mateIn": 2
+	},
+	{
+		"white": [
+			"Kh1",
+			"Qf6",
+			"Be3"
+		],
+		"black": [
+			"Ke8"
+		],
+		"mateIn": 2
 	}
 ]
