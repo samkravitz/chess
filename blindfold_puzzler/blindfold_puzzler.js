@@ -60,6 +60,9 @@ if (process.argv.length === 3 && process.argv[2] === 'seed') {
 const rl = readline.createInterface({ input, output })
 while (1) {
 	const puzzle = puzzles[Math.floor(Math.random() * puzzles.length)]
+	if (!puzzle['solution'])
+		continue
+
 	console.log('white: ', puzzle.white.join(' '))
 	console.log('black: ', puzzle.black.join(' '))
 
