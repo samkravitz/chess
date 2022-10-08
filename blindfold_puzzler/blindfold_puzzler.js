@@ -23,6 +23,10 @@ if (process.argv.length === 3 && process.argv[2] === 'seed') {
 	console.log('seeding puzzles...')
 
 	puzzles.forEach(puzzle => {
+		// TODO: seed mate in 2 puzzles
+		if (puzzle['mateIn'] == 2)
+			return
+
 		const chess = new Chess()
 		chess.clear()
 
