@@ -1,0 +1,68 @@
+
+White: Ke6, Ra7, Ng4
+Black: Kg8
+Mate in 2
+
+White: Kf6, Ra7, Bg7
+Black: Kg8
+Mate in 2
+
+White: Kg6, Bb4, Ng4
+Black: Kg8
+Mate in 2
+
+White: Kg7, Qe5, Qe7, Qg5
+Black: Ka8
+Mate in 1
+
+Alex King to Everyone (10:48 PM)
+White: Kb5, Qf8
+Black: Kd4, Qa7
+White to move
+
+White: Kg6, Rh7
+Black: Kg8
+Mate in 2
+
+White: Kc7, Qb8
+Black: Ka5
+Mate in 2
+
+White: Kd6, Rh5
+Black: Ka6
+Mate in 2
+
+White: Kc1, Rg1, Rg4
+Black: Kh3
+Mate in 2
+
+White: Kd5, Rh7, Pd6, Pe5
+Black: Kd8
+
+White: Kd2, Rb8, Rf1
+Black: Ke4
+Mate in 2
+
+White: Ke1, Rg5, Rh6
+Black: Kb7
+Mate in 2
+
+White: Kc6, Qd1
+Black: Kc8
+Mate in 2
+
+White: Kb6, Bf6, Bg4
+Black: Kb8
+Mate in 2
+
+White: Kg2, Qb5, Rd1
+Black: Kc7
+Mate in 2
+
+White: Kh1, Qf8, Ne5
+Black: Kh7
+Mate in 2
+
+White: Kh1, Qf6, Be3
+Black: Ke8
+Mate in 2
