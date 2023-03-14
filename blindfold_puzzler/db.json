@@ -515,6 +515,45 @@
     },
     {
         "white": [
+            "Ka2",
+            "Qe5",
+            "Rb8",
+            "Bg2"
+        ],
+        "black": [
+            "Kc4"
+        ],
+        "mateIn": 1
+    },
+    {
+        "white": [
+            "Ka2",
+            "Qe5",
+            "Rb8",
+            "Bg2"
+        ],
+        "black": [
+            "Kc4",
+            "Bd3",
+            "Nc5"
+        ],
+        "mateIn": 1
+    },
+    {
+        "white": [
+            "Ka2",
+            "Qe5",
+            "Rb8",
+            "Bg2"
+        ],
+        "black": [
+            "Kc4",
+            "Rc3"
+        ],
+        "mateIn": 1
+    },
+    {
+        "white": [
             "Kd4",
             "Re1",
             "Rf1",
@@ -591,5 +630,56 @@
             "Kg8"
         ],
         "mateIn": 2
+    },
+    {
+        "white": [
+            "Kg3",
+            "Be1",
+            "Bf5"
+        ],
+        "black": [
+            "Kg1"
+        ],
+        "mateIn": 2
+    },
+    {
+        "white": [
+            "Kh6",
+            "Ne4",
+            "Ne5"
+        ],
+        "black": [
+            "Kh8",
+            "Nf8"
+        ],
+        "mateIn": 2
+    },
+    {
+        "white": [
+            "Ka2",
+            "Qe5",
+            "Rb8",
+            "Bg2"
+        ],
+        "black": [
+            "Kc4",
+            "Rd4",
+            "Bc3"
+        ],
+        "mateIn": 1
+    },
+    {
+        "white": [
+            "Ka2",
+            "Qe5",
+            "Rb8",
+            "Bg2"
+        ],
+        "black": [
+            "Kc4",
+            "Rb4",
+            "Bd3"
+        ],
+        "mateIn": 1
     }
 ]
