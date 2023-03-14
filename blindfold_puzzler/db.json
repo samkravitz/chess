@@ -498,5 +498,53 @@
 			"Ke8"
 		],
 		"mateIn": 2
-	}
+	},
+    {
+    "white": [
+        "Ka2", "Qe5", "Rb8", "Bg2"
+    ],
+    "black": [
+        "Kc4", "Rd4", "Bd3"        
+        
+    ],
+    "mateIn": 1
+    },
+    {
+        "white": [
+            "Kd4", "Re1", "Rf1", "Bf6", "Ph7"
+        ],
+        "black": [
+            "Kf8"        
+        ],
+        "mateIn": 1
+    }, {
+        "white": ["Kg1", "Qd4", "Rc5"],
+        "black": ["Kb6"],
+        "mateIn": 1
+    },
+    {
+        "white": ["Kg1", "Qd6", "Rd3"],
+        "black": ["Kb7"],
+        "mateIn": 2
+    },
+    {
+        "white": ["Kf3", "Qd7", "Rc5"],
+        "black": ["Kg6"],
+        "mateIn": 2
+    },
+    {
+        "white": ["Kd8", "Rc6", "Bd5"],
+        "black": ["Ka8"],
+        "mateIn": 2
+    },
+    {
+        "white": ["Kf6", "Rc1", "Bg6"],
+        "black": ["Kd8"],
+        "mateIn": 2
+    },
+    {
+        "white": ["Ke6", "Re1", "Ba1"],
+        "black": ["Kg8"],
+        "mateIn": 2
+    }
 ]
