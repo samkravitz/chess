@@ -42,10 +42,6 @@ if (process.argv.length === 3 && process.argv[2] === 'seed') {
 	console.log('seeding puzzles...')
 
 	puzzles.forEach(puzzle => {
-		// TODO: seed mate in 2 puzzles
-		if (puzzle['mateIn'] == 2)
-			return
-
 		const chess = new Chess()
 		chess.clear()
 
@@ -61,15 +57,27 @@ if (process.argv.length === 3 && process.argv[2] === 'seed') {
 			chess.put({ type: piece, color: BLACK }, square)
 		})
 
-		let solution = ""
-		chess.moves().forEach(move => {
-			chess.move(move)
-			if (chess.in_checkmate()) {
-				solution = move
-				puzzle.solution = move
-			}
-			chess.undo()
-		})
+		console.log('seeding: ', puzzle)
+
+		let mateIn = 0
+		while (1) {
+			mateIn += 1
+
+			let aiMove = jsChessEngine.aiMove(chess.fen())
+			let from = Object.keys(aiMove)[0].toLowerCase()
+			let to = aiMove[Object.keys(aiMove)[0]].toLowerCase()
+			chess.move({ from, to })
+
+			if (chess.in_checkmate())
+				break
+
+			aiMove = jsChessEngine.aiMove(chess.fen())
+			from = Object.keys(aiMove)[0].toLowerCase()
+			to = aiMove[Object.keys(aiMove)[0]].toLowerCase()
+			chess.move({ from, to })
+		}
+
+		puzzle['mateIn'] = mateIn
 	})
 	fs.writeFileSync('db.json', JSON.stringify(puzzles))
 	console.log('done')
