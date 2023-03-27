@@ -2,6 +2,7 @@
 
 import fs from 'fs'
 import { Chess, PAWN, KNIGHT, BISHOP, ROOK, QUEEN, KING, WHITE, BLACK } from 'chess.js'
+import jsChessEngine from 'js-chess-engine'
 import * as readline from 'node:readline/promises'
 import { stdin as input, stdout as output } from 'node:process'
 
