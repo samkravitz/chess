@@ -87,66 +87,70 @@ if (process.argv.length === 3 && process.argv[2] === 'seed') {
 const rl = readline.createInterface({ input, output })
 while (1) {
 	const puzzle = puzzles[Math.floor(Math.random() * puzzles.length)]
-	if (!puzzle['solution'])
-		continue
-	
 	console.log(`white: ${puzzle.white.join(' ')}`)
 	console.log(`black: ${puzzle.black.join(' ')}`)
 	console.log(`mate in ${puzzle['mateIn']}`)
 
-	while (1) {
-		let chess = createChess(puzzle)
-		let correct = false
+	let chess = createChess(puzzle)
+	let correct = false
 
-		while (!correct) {
-			const answer = await rl.question('> ')
+	while (!correct) {
+		const answer = await rl.question('> ')
 
-			// give answer
-			if (answer === 'a' || answer === 'answer') {
+		// give answer
+		if (answer === 'a' || answer === 'answer') {
+			chess = createChess(puzzle)
+			const originalPosition = chess.ascii()
+			while (!chess.in_checkmate()) {
+				const aiMove = jsChessEngine.aiMove(chess.fen())
+				const from = Object.keys(aiMove)[0].toLowerCase()
+				const to = aiMove[Object.keys(aiMove)[0]].toLowerCase()
+				
+				const turn = chess.turn()
+				chess.move({ from, to })
+				console.log(`${turn}: ${chess.history().at(-1)}`)
+			}
+			correct = true
+			console.log(originalPosition)
+		}
 
+		// show board
+		else if (answer === 'h' || answer === 'hint') {
+			console.log(chess.ascii())
+		}
+
+		// quit
+		else if (answer === 'q' || answer === 'quit') {
+			process.exit(0)
+		}
+
+		// reset puzzle
+		else if (answer === 'r' || answer === 'reset') {
+			chess = createChess(puzzle)
+			console.log(`white: ${puzzle.white.join(' ')}`)
+			console.log(`black: ${puzzle.black.join(' ')}`)
+			console.log(`mate in ${puzzle['mateIn']}`)
+		}
+
+		else {
+			if (!chess.move(answer)) {
+				console.log('Illegal move.')
+				continue
 			}
 
-			// show board
-			else if (answer === 'h' || answer === 'hint') {
-				console.log(chess.ascii())
-			}
-
-			// quit
-			else if (answer === 'q' || answer === 'quit') {
-				process.exit(0)
-			}
-
-			// reset puzzle
-			else if (answer === 'r' || answer === 'reset') {
-				chess = createChess(puzzle)
-				console.log(`white: ${puzzle.white.join(' ')}`)
-				console.log(`black: ${puzzle.black.join(' ')}`)
-				console.log(`mate in ${puzzle['mateIn']}`)
-			}
-
-			else {
-				if (!chess.move(answer)) {
-					console.log('Illegal move.')
-					continue
-				}
-
-				if (chess.in_checkmate()) {
-					console.log('Correct!')
-					correct = true
-				} else {
-					console.log(`fen: ${chess.fen()}`);
-					const aiMove = jsChessEngine.aiMove(chess.fen())
-					const from = Object.keys(aiMove)[0].toLowerCase()
-					const to = aiMove[Object.keys(aiMove)[0]].toLowerCase()
-					const movedPiece = chess.get(from)
-					let movedPieceString = movedPiece.type.toUpperCase()
-					if (movedPiece === 'P')
-						movedPieceString = ''
-
-					console.log(`black plays ${movedPieceString}${to}`)
-					chess.move({ from, to })
-				}
+			if (chess.in_checkmate()) {
+				console.log('Correct!')
+				correct = true
+			} else {
+				const aiMove = jsChessEngine.aiMove(chess.fen())
+				const from = Object.keys(aiMove)[0].toLowerCase()
+				const to = aiMove[Object.keys(aiMove)[0]].toLowerCase()
+				
+				const turn = chess.turn()
+				chess.move({ from, to })
+				console.log(`${turn}: ${chess.history().at(-1)}`)
 			}
 		}
+		console.log('')
 	}
 }
