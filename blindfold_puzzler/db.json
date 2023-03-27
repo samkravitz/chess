@@ -644,18 +644,6 @@
     },
     {
         "white": [
-            "Kh6",
-            "Ne4",
-            "Ne5"
-        ],
-        "black": [
-            "Kh8",
-            "Nf8"
-        ],
-        "mateIn": 2
-    },
-    {
-        "white": [
             "Ka2",
             "Qe5",
             "Rb8",
