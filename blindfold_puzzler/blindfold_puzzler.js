@@ -20,6 +20,24 @@ const getPieceFromMove = (move) => {
 	}
 }
 
+const createChess = (puzzle) => {
+	const chess = new Chess()
+	chess.clear()
+	puzzle.white.forEach(move => {
+		const piece = getPieceFromMove(move);
+		const square = move.substring(1)
+		chess.put({ type: piece, color: WHITE }, square)
+	})
+
+	puzzle.black.forEach(move => {
+		const piece = getPieceFromMove(move);
+		const square = move.substring(1)
+		chess.put({ type: piece, color: BLACK }, square)
+	})
+
+	return chess
+}
+
 if (process.argv.length === 3 && process.argv[2] === 'seed') {
 	console.log('seeding puzzles...')
 
@@ -63,41 +81,64 @@ while (1) {
 	const puzzle = puzzles[Math.floor(Math.random() * puzzles.length)]
 	if (!puzzle['solution'])
 		continue
-
-	console.log('white: ', puzzle.white.join(' '))
-	console.log('black: ', puzzle.black.join(' '))
-
-	let correct = false
-
-	while (!correct) {
-		const answer = await rl.question('> ')
-		if (answer === 'answer') {
-			console.log(puzzle.solution)
-			const chess = new Chess()
-			chess.clear()
-			puzzle.white.forEach(move => {
-				const piece = getPieceFromMove(move);
-				const square = move.substring(1)
-				chess.put({ type: piece, color: WHITE }, square)
-			})
 	
-			puzzle.black.forEach(move => {
-				const piece = getPieceFromMove(move);
-				const square = move.substring(1)
-				chess.put({ type: piece, color: BLACK }, square)
-			})
+	console.log(`white: ${puzzle.white.join(' ')}`)
+	console.log(`black: ${puzzle.black.join(' ')}`)
+	console.log(`mate in ${puzzle['mateIn']}`)
 
-			console.log(chess.ascii())
+	while (1) {
+		let chess = createChess(puzzle)
+		let correct = false
 
-			console.log()
-			break
-		}
+		while (!correct) {
+			const answer = await rl.question('> ')
 
-		if (answer === puzzle.solution.slice(0, -1).toLowerCase()) {
-			console.log('correct!\n');
-			correct = true
-		} else {
-			console.log('incorrect, try again')
+			// give answer
+			if (answer === 'a' || answer === 'answer') {
+
+			}
+
+			// show board
+			else if (answer === 'h' || answer === 'hint') {
+				console.log(chess.ascii())
+			}
+
+			// quit
+			else if (answer === 'q' || answer === 'quit') {
+				process.exit(0)
+			}
+
+			// reset puzzle
+			else if (answer === 'r' || answer === 'reset') {
+				chess = createChess(puzzle)
+				console.log(`white: ${puzzle.white.join(' ')}`)
+				console.log(`black: ${puzzle.black.join(' ')}`)
+				console.log(`mate in ${puzzle['mateIn']}`)
+			}
+
+			else {
+				if (!chess.move(answer)) {
+					console.log('Illegal move.')
+					continue
+				}
+
+				if (chess.in_checkmate()) {
+					console.log('Correct!')
+					correct = true
+				} else {
+					console.log(`fen: ${chess.fen()}`);
+					const aiMove = jsChessEngine.aiMove(chess.fen())
+					const from = Object.keys(aiMove)[0].toLowerCase()
+					const to = aiMove[Object.keys(aiMove)[0]].toLowerCase()
+					const movedPiece = chess.get(from)
+					let movedPieceString = movedPiece.type.toUpperCase()
+					if (movedPiece === 'P')
+						movedPieceString = ''
+
+					console.log(`black plays ${movedPieceString}${to}`)
+					chess.move({ from, to })
+				}
+			}
 		}
 	}
 }
