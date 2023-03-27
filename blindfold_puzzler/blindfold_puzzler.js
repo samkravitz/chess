@@ -132,6 +132,14 @@ while (1) {
 			console.log(`mate in ${puzzle['mateIn']}`)
 		}
 
+		// clear screen
+		else if (answer == 'c' || answer === 'clear') {
+			console.clear()
+			console.log(`white: ${puzzle.white.join(' ')}`)
+			console.log(`black: ${puzzle.black.join(' ')}`)
+			console.log(`mate in ${puzzle['mateIn']}`)
+		}
+
 		else {
 			if (!chess.move(answer)) {
 				console.log('Illegal move.')
@@ -139,7 +147,9 @@ while (1) {
 			}
 
 			if (chess.in_checkmate()) {
+				chess = createChess(puzzle)
 				console.log('Correct!')
+				console.log(chess.ascii())
 				correct = true
 			} else {
 				const aiMove = jsChessEngine.aiMove(chess.fen())
