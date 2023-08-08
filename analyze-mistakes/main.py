@@ -72,15 +72,20 @@ def move_went_from_equal_to_losing(last_evaluation, evaluation):
 
 while game := chess.pgn.read_game(pgn):
 	games_analyzed += 1
+	print(f'analyzing game {games_analyzed}')
 	board = game.board()
 	set_player(game)
-	evaluation = 0
-	last_evaluation = 0
+	evaluation = {
+		'type': 'cp',
+		'value': 0
+	}
+	last_evaluation = {
+		'type': 'cp',
+		'value': 0
+	}
 
 	for move in game.mainline_moves():
-		print(f'analyzing move {move}')
-		last_evaluation = stockfish.get_evaluation()
-		stockfish.set_fen_position(board.fen())
+		last_evaluation = evaluation
 		board.push(move)
 		assert(board.is_valid)
 
@@ -96,7 +101,14 @@ while game := chess.pgn.read_game(pgn):
 		if move_went_from_equal_to_losing(last_evaluation, evaluation):
 			moves_went_from_equal_to_losing += 1
 
+num_moves_that_were_a_mistake = moves_went_from_winning_to_not_winning + moves_went_from_equal_to_losing
+num_moves_that_were_a_mistake_ratio = num_moves_that_were_a_mistake / moves_analyzed
+
 print(f'{games_analyzed} games analyzed')
 print(f'{moves_analyzed} moves analyzed')
-print(f'{moves_went_from_winning_to_not_winning} moves went from winning to not winning')
-print(f'{moves_went_from_equal_to_losing} moves went from equal to losing')
+print(f'{num_moves_that_were_a_mistake}/{moves_analyzed} ({num_moves_that_were_a_mistake_ratio*100:.1f}%) of your moves were mistakes. Nice!')
+print(f'{moves_went_from_winning_to_not_winning} moves brought your position from winning to not winning')
+print(f'{moves_went_from_equal_to_losing} moves brought your position from equal to losing')
+
+end = time.time()
+print(f'took {end - start} seconds')
